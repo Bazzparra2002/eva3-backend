@@ -5,7 +5,7 @@ from .forms import ReservaForm
 
 
 def inicio(request):
-    # Marcar salas como disponibles si su reserva expiró
+    #marca las salas como disponibles si su reserva termina
     ahora = timezone.now()
     reservas_expiradas = Reserva.objects.filter(fecha_hora_termino__lt=ahora)
 
@@ -17,10 +17,10 @@ def inicio(request):
     return render(request, "inicio.html", {"salas": salas})
 
 
-def detalle_sala(request, sala_id):   # ← NOMBRE CORRECTO
+def detalle_sala(request, sala_id):   
     sala = get_object_or_404(Sala, id=sala_id)
 
-    # Si sala está disponible → permitir reservar
+    #sala disponible va permitir reservar
     if sala.disponibilidad:
         if request.method == "POST":
             form = ReservaForm(request.POST)
@@ -34,7 +34,7 @@ def detalle_sala(request, sala_id):   # ← NOMBRE CORRECTO
 
         return render(request, "detalle.html", {"sala": sala, "form": form})
 
-    # Si sala NO está disponible mostrar reserva activa
+    #si sala esta ocupada muestra que la reserva esta en transcurso
     else:
         reserva_activa = Reserva.objects.filter(
             sala_reservada=sala,

@@ -22,10 +22,10 @@ class Reserva(models.Model):
             
             self.fecha_hora_inicio = timezone.now()
                     
-            # Calcular duración
+            #calcula la duración
             self.fecha_hora_termino = self.fecha_hora_inicio + timedelta(hours=2)
 
-            # Cambiar estado de sala a ocupada
+            #cambia el estado de sala a ocupada
             self.sala_reservada.disponibilidad = False
             self.sala_reservada.save()
 
