@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ sala.nombre_sala }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <h1>{{ sala.nombre_sala }}</h1>
     <p>Capacidad máxima: {{ sala.capacidad_max }}</p>
+
     <p>Estado:
-        {% if sala.disponibilidad %}
+        {% if sala.disponible_ahora %}
             Disponible
         {% else %}
             Ocupada
         {% endif %}
     </p>
 
-    {% if sala.disponibilidad %}
+    {% if sala.disponible_ahora %}
         <h3>Reservar sala</h3>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Reservar</button>
+            <button type="submit" class="btn btn-primary">Reservar</button>
         </form>
     {% else %}
         <h3>Reserva en transcurso:</h3>
-        <p>Inicio: {{ reserva_activa.fecha_hora_inicio }}</p>
-        <p>Término: {{ reserva_activa.fecha_hora_termino }}</p>
+            <p>Inicio: {{ reserva_activa.fecha_hora_inicio }}</p>
+            <p>Término: {{ reserva_activa.fecha_hora_termino }}</p>
     {% endif %}
 
     <br>

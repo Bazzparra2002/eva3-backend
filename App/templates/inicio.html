@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Reserva de Salas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <h1>Biblioteca ITID </h1>
-    <h2>Salas de Estudio </h2>
+    <h1>Biblioteca ITID</h1>
+    <h2>Salas de Estudio</h2>
 
     {% for sala in salas %}
     <div style="border:1px solid #ccc; padding:10px; margin:10px;">
         <h3>{{ sala.nombre_sala }}</h3>
         <p>Capacidad: {{ sala.capacidad_max }}</p>
         <p>Estado:
-            {% if sala.disponibilidad %}
+            {% if sala.disponible_ahora %}
                 Disponible
             {% else %}
                 Ocupada
@@ -24,6 +23,6 @@
 
         <a href="{% url 'detalle_sala' sala.id %}">Ver detalle</a>
     </div>
-    {% endfor %} 
+    {% endfor %}
 </body>
 </html>
